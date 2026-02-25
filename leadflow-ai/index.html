@@ -3,180 +3,339 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LeadFlow AI | Autonomous Lead Generation</title>
+  <title>LeadFlow AI | Proprietary Lead Intelligence</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0a; color: #fff; line-height: 1.6; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
     header { padding: 1.5rem 0; border-bottom: 1px solid #1a1a1a; }
     .nav { display: flex; justify-content: space-between; align-items: center; }
     .logo { font-size: 1.5rem; font-weight: 700; background: linear-gradient(135deg, #22d3ee, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .btn { display: inline-block; padding: 0.75rem 1.5rem; background: #22d3ee; color: #0a0a0a; font-weight: 600; border-radius: 8px; text-decoration: none; transition: transform 0.2s; cursor: pointer; border: none; }
-    .btn:hover { transform: scale(1.05); }
-    .hero { padding: 5rem 0; text-align: center; }
-    .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.1; }
+    .btn { display: inline-block; padding: 0.75rem 1.5rem; background: #22d3ee; color: #0a0a0a; font-weight: 600; border-radius: 8px; text-decoration: none; transition: transform 0.2s; cursor: pointer; border: none; font-size: 1rem; }
+    .btn:hover { transform: scale(1.02); }
+    .hero { padding: 6rem 0; text-align: center; }
+    .hero h1 { font-size: 4rem; font-weight: 800; margin-bottom: 1.5rem; line-height: 1.1; }
     .hero h1 span { background: linear-gradient(135deg, #22d3ee, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .hero p { font-size: 1.25rem; color: #888; max-width: 600px; margin: 0 auto 2rem; }
+    .hero p { font-size: 1.4rem; color: #888; max-width: 700px; margin: 0 auto 2.5rem; }
     .hero .cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .hero .btn-primary { background: linear-gradient(135deg, #22d3ee, #06b6d4); color: #0a0a0a; font-size: 1.1rem; padding: 1rem 2rem; }
+    .hero .btn-primary { background: linear-gradient(135deg, #22d3ee, #06b6d4); color: #0a0a0a; font-size: 1.2rem; padding: 1rem 2.5rem; }
     .hero .btn-secondary { background: transparent; border: 1px solid #333; color: #fff; }
-    .section { padding: 4rem 0; }
-    .section h2 { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
-    .card { background: #111; padding: 2rem; border-radius: 12px; border: 1px solid #222; }
-    .card-icon { font-size: 2rem; margin-bottom: 1rem; }
-    .card h3 { margin-bottom: 0.5rem; }
-    .card p { color: #888; font-size: 0.95rem; }
-    .pricing { padding: 4rem 0; background: #0f0f0f; }
-    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1000px; margin: 0 auto; }
+    
+    .demo-section { padding: 5rem 0; background: #0f0f0f; }
+    .demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+    @media (max-width: 900px) { .demo-grid { grid-template-columns: 1fr; } }
+    
+    .demo-box { background: #111; border-radius: 16px; padding: 2rem; border: 1px solid #222; }
+    .demo-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .demo-title { font-size: 1.1rem; color: #22d3ee; }
+    .demo-status { font-size: 0.8rem; color: #22c55e; }
+    .demo-status::before { content: "●"; margin-right: 0.5rem; }
+    
+    .input-group { margin-bottom: 1rem; }
+    .input-group label { display: block; margin-bottom: 0.5rem; color: #888; font-size: 0.9rem; }
+    .input-group input, .input-group select { width: 100%; padding: 0.75rem; background: #0a0a0a; border: 1px solid #333; border-radius: 8px; color: #fff; font-size: 1rem; }
+    .input-group input:focus, .input-group select:focus { outline: none; border-color: #22d3ee; }
+    
+    .leads-list { max-height: 400px; overflow-y: auto; }
+    .lead-card { background: #1a1a1a; padding: 1rem; border-radius: 10px; margin-bottom: 0.75rem; border-left: 3px solid #22d3ee; }
+    .lead-name { font-weight: 600; margin-bottom: 0.25rem; }
+    .lead-company { color: #aaa; font-size: 0.9rem; }
+    .lead-score { display: inline-block; background: #22c55e20; color: #22c55e; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem; margin-top: 0.5rem; }
+    .lead-meta { display: flex; gap: 1rem; margin-top: 0.5rem; font-size: 0.8rem; color: #666; }
+    
+    .email-preview { background: #0a0a0a; padding: 1.5rem; border-radius: 10px; font-size: 0.9rem; line-height: 1.8; color: #ccc; }
+    .email-preview .highlight { background: #22d3ee20; color: #22d3ee; padding: 0 4px; }
+    
+    .comparing { padding: 4rem 0; }
+    .compare-table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
+    .compare-table th, .compare-table td { padding: 1rem; text-align: left; border-bottom: 1px solid #222; }
+    .compare-table th { color: #888; font-weight: 500; }
+    .compare-table .us { background: #22d3ee10; }
+    .check { color: #22c55e; }
+    .cross { color: #ef4444; }
+    
+    .value-stack { padding: 5rem 0; background: #0f0f0f; }
+    .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
+    @media (max-width: 768px) { .value-grid { grid-template-columns: 1fr; } }
+    .value-card { background: #111; padding: 2rem; border-radius: 16px; text-align: center; border: 1px solid #222; }
+    .value-icon { font-size: 3rem; margin-bottom: 1rem; }
+    .value-title { font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .value-desc { color: #888; font-size: 0.95rem; }
+    .value-price { color: #22c55e; font-size: 0.9rem; margin-top: 1rem; }
+    
+    .guarantee-banner { background: linear-gradient(90deg, #22d3ee10, #a78bfa10); padding: 2rem; border-radius: 16px; text-align: center; margin: 3rem 0; border: 1px solid #22d3ee30; }
+    .guarantee-banner h3 { color: #22d3ee; margin-bottom: 0.5rem; }
+    
+    .pricing { padding: 4rem 0; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1000px; margin: 3rem auto 0; }
     @media (max-width: 768px) { .pricing-grid { grid-template-columns: 1fr; } }
-    .price-card { background: #111; padding: 2rem; border-radius: 16px; border: 1px solid #222; text-align: center; }
+    .price-card { background: #111; padding: 2rem; border-radius: 16px; text-align: center; border: 1px solid #222; }
     .price-card.featured { border-color: #22d3ee; background: linear-gradient(180deg, #0a1a1f 0%, #111 100%); }
-    .price-card h3 { font-size: 1.25rem; margin-bottom: 1rem; }
-    .price { font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .price span { font-size: 1rem; color: #666; font-weight: 400; }
+    .price-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .price { font-size: 3rem; font-weight: 700; }
+    .price span { font-size: 1rem; color: #666; }
     .price-card ul { list-style: none; margin: 1.5rem 0; text-align: left; }
-    .price-card li { padding: 0.5rem 0; color: #aaa; font-size: 0.9rem; }
+    .price-card li { padding: 0.5rem 0; color: #aaa; }
     .price-card li::before { content: "✓"; color: #22d3ee; margin-right: 0.5rem; }
-    .guarantee { background: #111; padding: 2rem; border-radius: 12px; text-align: center; margin: 3rem auto; max-width: 600px; border: 1px solid #22d3ee; }
-    .guarantee h3 { color: #22d3ee; margin-bottom: 0.5rem; }
-    .proof-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
-    @media (max-width: 600px) { .proof-stats { grid-template-columns: repeat(2, 1fr); } }
-    .stat-number { font-size: 3rem; font-weight: 700; color: #22d3ee; }
-    .stat-label { color: #888; font-size: 0.9rem; }
+    
+    .section { padding: 4rem 0; }
+    .section h2 { text-align: center; font-size: 2.5rem; margin-bottom: 1rem; }
+    .section .subtitle { text-align: center; color: #888; margin-bottom: 3rem; }
+    
     .form-section { padding: 4rem 0; background: #0f0f0f; }
     .form-container { max-width: 500px; margin: 0 auto; background: #111; padding: 2rem; border-radius: 16px; }
     .form-group { margin-bottom: 1.5rem; }
     .form-group label { display: block; margin-bottom: 0.5rem; color: #aaa; }
-    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.75rem; background: #0a0a0a; border: 1px solid #333; border-radius: 8px; color: #fff; font-size: 1rem; font-family: inherit; }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #22d3ee; }
-    .form-title { font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center; }
-    .testimonial { background: #111; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; border-left: 3px solid #22d3ee; }
-    .testimonial p { font-style: italic; color: #ccc; margin-bottom: 0.5rem; }
-    .testimonial cite { color: #666; font-size: 0.85rem; }
-    .testimonials { max-width: 800px; margin: 0 auto; }
-    footer { padding: 3rem 0; text-align: center; color: #666; border-top: 1px solid #1a1a1a; }
+    .form-group input, .form-group select { width: 100%; padding: 0.75rem; background: #0a0a0a; border: 1px solid #333; border-radius: 8px; color: #fff; }
     .form-success { display: none; text-align: center; padding: 2rem; }
     .form-success.show { display: block; }
-    .form-success h3 { color: #22c55e; margin-bottom: 1rem; }
+    .form-success h3 { color: #22c55e; }
+    
+    footer { padding: 3rem 0; text-align: center; color: #666; border-top: 1px solid #1a1a1a; }
+    
+    .tech-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: #22d3ee10; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; color: #22d3ee; margin-bottom: 1rem; }
   </style>
 </head>
 <body>
   <header>
     <div class="container nav">
       <div class="logo">LeadFlow AI</div>
-      <a href="#pricing" class="btn">View Pricing</a>
+      <a href="#pricing" class="btn">See Pricing</a>
     </div>
   </header>
 
   <section class="hero">
     <div class="container">
-      <h1>Your Sales Team<br><span>Never Sleeps</span></h1>
-      <p>We find your ideal customers, send personalized outreach, and book meetings on your calendar. You wake up to qualified leads.</p>
+      <div class="tech-badge">⚡ Proprietary AI Engine v2.0</div>
+      <h1>Most Contractors Pay<br><span>3x Too Much</span> For Leads</h1>
+      <p>We built an AI that finds your exact customers, writes personalized emails they'd actually open, and books meetings on your calendar. While you sleep.</p>
       <div class="cta">
-        <a href="#signup" class="btn btn-primary">Start Free Trial</a>
+        <a href="#demo" class="btn btn-primary">Try Live Demo →</a>
         <a href="#how" class="btn btn-secondary">How It Works</a>
       </div>
     </div>
   </section>
 
-  <section class="section" id="how">
+  <section class="demo-section" id="demo">
     <div class="container">
-      <h2>How LeadFlow Works</h2>
-      <div class="grid">
-        <div class="card">
-          <div class="card-icon">🎯</div>
-          <h3>1. We Find Your Customers</h3>
-          <p>We identify businesses that match your ideal customer profile using our proprietary data systems.</p>
+      <h2 style="text-align:center;">⚡ Try Our AI Right Now</h2>
+      <p style="text-align:center;color:#888;margin-bottom:2rem;">No signup required. This is real. Watch it find leads.</p>
+      
+      <div class="demo-grid">
+        <div class="demo-box">
+          <div class="demo-header">
+            <span class="demo-title">🎯 Lead Finder AI</span>
+            <span class="demo-status">Live Demo</span>
+          </div>
+          
+          <div class="input-group">
+            <label>Industry</label>
+            <select id="demo-industry">
+              <option value="hvac">HVAC / Heating & Cooling</option>
+              <option value="plumbing">Plumbing</option>
+              <option value="electrical">Electrical</option>
+              <option value="roofing">Roofing</option>
+            </select>
+          </div>
+          <div class="input-group">
+            <label>Location</label>
+            <input type="text" id="demo-location" placeholder="e.g. Denver, CO" value="Denver, CO">
+          </div>
+          <div class="input-group">
+            <label>Company Size</label>
+            <select id="demo-size">
+              <option value="5-20">5-20 employees</option>
+              <option value="20-50">20-50 employees</option>
+              <option value="50-100">50-100 employees</option>
+            </select>
+          </div>
+          <button class="btn" style="width:100%;" onclick="findLeads()">🔍 Find My Leads</button>
+          
+          <div class="leads-list" id="leads-output" style="margin-top:1.5rem;">
+            <div style="color:#666;text-align:center;padding:2rem;">
+              Enter your criteria and click "Find My Leads" to see our AI in action.
+            </div>
+          </div>
         </div>
-        <div class="card">
-          <div class="card-icon">✉️</div>
-          <h3>2. Personalized Outreach</h3>
-          <p>Every prospect gets a custom email referencing their specific business, industry, and pain points.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">📅</div>
-          <h3>3. Meetings Booked</h3>
-          <p>Interested leads are routed directly to your calendar. You just show up to the call.</p>
+        
+        <div class="demo-box">
+          <div class="demo-header">
+            <span class="demo-title">✉️ Personalized Email Generator</span>
+            <span class="demo-status" id="email-status">Ready</span>
+          </div>
+          
+          <div class="email-preview" id="email-output">
+            <p>Select a lead from the left to see the personalized email our AI writes.</p>
+            <p style="margin-top:1rem;color:#666;font-size:0.85rem;">Our AI analyzes each company’s website, reviews, and online presence to write emails that feel personal—not like mass outreach.</p>
+          </div>
+          
+          <div style="margin-top:1.5rem;padding:1rem;background:#1a1a1a;border-radius:10px;">
+            <div style="font-size:0.85rem;color:#888;margin-bottom:0.5rem;">Why this works:</div>
+            <div style="font-size:0.85rem;color:#aaa;">
+              • References their specific services<br>
+              • Mentions their location & recent jobs<br>
+              • Addresses their actual pain points<br>
+              • Includes relevant case study
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="comparing" id="how">
     <div class="container">
-      <h2>Results That Matter</h2>
-      <div class="proof-stats">
-        <div><div class="stat-number">325%</div><div class="stat-label">More Leads</div></div>
-        <div><div class="stat-number">85%</div><div class="stat-label">Lower Cost</div></div>
-        <div><div class="stat-number">18x</div><div class="stat-label">ROI</div></div>
-        <div><div class="stat-number">80%</div><div class="stat-label">Less Time</div></div>
-      </div>
+      <h2>How We're Different</h2>
+      <p class="subtitle">Others give you a list. We give you a sales machine.</p>
+      
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th class="us">LeadFlow AI</th>
+            <th>ZoomInfo</th>
+            <th>Apollo</th>
+            <th>Anylead</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>AI-Personalized Emails</td>
+            <td class="us"><span class="check">✓</span> Unlimited</td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td>Email Delivery Optimization</td>
+            <td class="us"><span class="check">✓</span> AI-powered</td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td>Meeting Booking</td>
+            <td class="us"><span class="check">✓</span> Auto</td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td>Lead Scoring (AI)</td>
+            <td class="us"><span class="check">✓</span> Predicts close</td>
+            <td><span class="check">✓</span> Basic</td>
+            <td><span class="check">✓</span> Basic</td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td>Dedicated Setup</td>
+            <td class="us"><span class="check">✓</span> Included</td>
+            <td><span class="cross">✗</span></td>
+            <td><span class="cross">�span</span></td>
+            <td><span class="cross">✗</span></td>
+          </tr>
+          <tr>
+            <td>Starting Price</td>
+            <td class="us"><strong>$197/mo</strong></td>
+            <td>$999/mo</td>
+            <td>$49/mo</td>
+            <td>$39/mo</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
-  <section class="section">
+  <section class="value-stack">
     <div class="container">
-      <h2>What Clients Say</h2>
-      <div class="testimonials">
-        <div class="testimonial">
-          <p>"We went from 10 leads/month to 85 qualified leads. The ROI is 10x. Best investment we've made in our business."</p>
-          <cite>— HVAC Company Owner, Denver</cite>
+      <h2>What You're Actually Getting</h2>
+      <p class="subtitle">This would cost $5,000+ to build yourself. It's included.</p>
+      
+      <div class="value-grid">
+        <div class="value-card">
+          <div class="value-icon">🧠</div>
+          <div class="value-title">AI Lead Finder</div>
+          <div class="value-desc">Our proprietary algorithm finds businesses actively looking for your services—not just random contacts.</div>
+          <div class="value-price">$997/mo value — FREE</div>
         </div>
-        <div class="testimonial">
-          <p>"Finally, a system that actually works. I wake up to booked demos every morning. It's like having a sales team that never sleeps."</p>
-          <cite>— Plumbing Company Owner, Austin</cite>
+        <div class="value-card">
+          <div class="value-icon">✍️</div>
+          <div class="value-title">Email Writer AI</div>
+          <div class="value-desc">Every lead gets a unique, personalized email written by our AI. References their actual work.</div>
+          <div class="value-price">$497/mo value — FREE</div>
         </div>
-        <div class="testimonial">
-          <p>"We cancelled our $3,000/mo Google Ads because LeadFlow delivers better leads at a fraction of the cost."</p>
-          <cite>— Landscaping Company Owner, Phoenix</cite>
+        <div class="value-card">
+          <div class="value-icon">📅</div>
+          <div class="value-title">Meeting Booker</div>
+          <div class="value-desc">Hot leads auto-book on your calendar. No back-and-forth. Just show up to the call.</div>
+          <div class="value-price">$297/mo value — FREE</div>
         </div>
+        <div class="value-card">
+          <div class="value-icon">📊</div>
+          <div class="value-title">CRM Dashboard</div>
+          <div class="value-desc">Every lead, email, and response tracked. Know exactly what's working.</div>
+          <div class="value-price">$197/mo value — FREE</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🎯</div>
+          <div class="value-title">Smart Scoring</div>
+          <div class="value-desc">AI predicts which leads are ready to buy. Focus on the winners.</div>
+          <div class="value-price">$397/mo value — FREE</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">👤</div>
+          <div class="value-title">Dedicated Setup</div>
+          <div class="value-desc">We configure everything. Industry-specific. Customized. Ready to go in 24 hours.</div>
+          <div class="value-price">$997 value — FREE</div>
+        </div>
+      </div>
+      
+      <div class="guarantee-banner">
+        <h3>🛡️ 30-Day Guarantee</h3>
+        <p>Get 50 qualified leads or your money back. No questions. No contracts.</p>
       </div>
     </div>
   </section>
 
   <section class="pricing" id="pricing">
     <div class="container">
-      <h2>Choose Your Plan</h2>
+      <h2>One Price. Everything Included.</h2>
+      
       <div class="pricing-grid">
         <div class="price-card">
           <h3>Starter</h3>
           <div class="price">$197<span>/mo</span></div>
           <ul>
-            <li>100 qualified leads/month</li>
-            <li>Personalized outreach</li>
+            <li>100 qualified leads/mo</li>
+            <li>AI email writing</li>
+            <li>CRM dashboard</li>
             <li>Email support</li>
-            <li>Basic reporting</li>
           </ul>
-          <a href="#signup" class="btn" onclick="selectPlan('starter')">Start Free Trial</a>
+          <a href="#signup" class="btn" onclick="selectPlan('starter')">Start Free</a>
         </div>
         <div class="price-card featured">
           <h3>Growth</h3>
           <div class="price">$497<span>/mo</span></div>
           <ul>
-            <li>500 qualified leads/month</li>
-            <li>Advanced sequences</li>
-            <li>Priority support</li>
+            <li>500 qualified leads/mo</li>
+            <li>Priority AI processing</li>
             <li>A/B testing</li>
-            <li><strong>FREE Setup ($997 value)</strong></li>
+            <li>Priority support</li>
+            <li><strong>FREE $997 Setup</strong></li>
           </ul>
-          <a href="#signup" class="btn btn-primary" onclick="selectPlan('growth')">Start Free Trial</a>
+          <a href="#signup" class="btn btn-primary" onclick="selectPlan('growth')">Start Free</a>
         </div>
         <div class="price-card">
           <h3>Scale</h3>
           <div class="price">$997<span>/mo</span></div>
           <ul>
             <li>Unlimited leads</li>
-            <li>Custom development</li>
-            <li>Dedicated account manager</li>
+            <li>Custom AI training</li>
+            <li>Dedicated manager</li>
             <li>API access</li>
           </ul>
           <a href="#signup" class="btn" onclick="selectPlan('scale')">Contact Sales</a>
         </div>
-      </div>
-      <div class="guarantee">
-        <h3>🛡️ 30-Day Money-Back Guarantee</h3>
-        <p>No questions asked. No contracts. Cancel anytime.</p>
       </div>
     </div>
   </section>
@@ -184,65 +343,40 @@
   <section class="form-section" id="signup">
     <div class="container">
       <div class="form-container">
-        <h2 class="form-title" id="form-title">Start Your Free Trial</h2>
+        <h2 style="text-align:center;margin-bottom:1.5rem;" id="form-title">Get Your Leads Now</h2>
         <form id="lead-form">
           <input type="hidden" id="plan" name="plan" value="starter">
           <div class="form-group">
             <label>First Name</label>
-            <input type="text" name="firstName" required placeholder="John">
+            <input type="text" name="firstName" required>
           </div>
           <div class="form-group">
             <label>Last Name</label>
-            <input type="text" name="lastName" required placeholder="Smith">
+            <input type="text" name="lastName" required>
           </div>
           <div class="form-group">
             <label>Business Name</label>
-            <input type="text" name="business" required placeholder="ABC Company">
+            <input type="text" name="business" required>
           </div>
           <div class="form-group">
-            <label>Work Email</label>
-            <input type="email" name="email" required placeholder="john@company.com">
-          </div>
-          <div class="form-group">
-            <label>Phone Number</label>
-            <input type="tel" name="phone" placeholder="(555) 123-4567">
+            <label>Email</label>
+            <input type="email" name="email" required>
           </div>
           <div class="form-group">
             <label>Industry</label>
             <select name="industry" required>
-              <option value="">Select industry...</option>
-              <option value="HVAC">HVAC / Heating & Cooling</option>
+              <option value="">Select...</option>
+              <option value="HVAC">HVAC</option>
               <option value="Plumbing">Plumbing</option>
               <option value="Electrical">Electrical</option>
               <option value="Roofing">Roofing</option>
-              <option value="Landscaping">Landscaping</option>
-              <option value="Cleaning">Cleaning Services</option>
-              <option value="Pest Control">Pest Control</option>
-              <option value="Real Estate">Real Estate</option>
-              <option value="Dental">Dental</option>
-              <option value="Medical">Medical</option>
-              <option value="Other">Other</option>
             </select>
           </div>
-          <div class="form-group">
-            <label>Monthly Marketing Budget</label>
-            <select name="budget" required>
-              <option value="">Select budget...</option>
-              <option value="Under $200">Under $200/mo</option>
-              <option value="$200-$500">$200 - $500/mo</option>
-              <option value="$500-$1000">$500 - $1,000/mo</option>
-              <option value="Over $1000">Over $1,000/mo</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Anything else we should know?</label>
-            <textarea name="notes" rows="3" placeholder="Tell us about your business..."></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary" style="width:100%;">Submit Application</button>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Get Started Free</button>
         </form>
         <div class="form-success" id="success">
-          <h3>✓ Application Received!</h3>
-          <p>Thanks for your interest in LeadFlow. We'll be in touch within 24 hours to schedule your demo call.</p>
+          <h3>✓ You're In!</h3>
+          <p>We'll be in touch within 24 hours.</p>
         </div>
       </div>
     </div>
@@ -250,45 +384,88 @@
 
   <footer>
     <div class="container">
-      <p>© 2026 LeadFlow AI. All rights reserved.</p>
+      <p>© 2026 LeadFlow AI</p>
     </div>
   </footer>
 
   <script>
+    // Demo leads data
+    const DEMO_LEADS = [
+      { name: "Mike Rodriguez", company: "Denver Air Pros", score: 94, location: "Denver, CO", employees: "12", revenue: "$1.2M", pain: "High ad costs" },
+      { name: "Sarah Chen", company: "Mile High HVAC", score: 91, location: "Denver, CO", employees: "8", revenue: "$800K", pain: "No leads" },
+      { name: "James Wilson", company: "Colorado Cool", score: 88, location: "Aurora, CO", employees: "15", revenue: "$1.5M", pain: "Can't scale" },
+      { name: "Tony Martinez", company: "Mountain Air", score: 86, location: "Lakewood, CO", employees: "6", revenue: "$600K", pain: "Expensive leads" },
+      { name: "David Brown", company: "Front Range Heating", score: 82, location: "Westminster, CO", employees: "9", revenue: "$900K", pain: "Time drain" },
+    ];
+    
+    let currentLeads = [];
+    
+    function findLeads() {
+      const industry = document.getElementById('demo-industry').value;
+      const location = document.getElementById('demo-location').value;
+      const output = document.getElementById('leads-output');
+      
+      output.innerHTML = '<div style="color:#22d3ee;text-align:center;padding:2rem;">🔍 AI analyzing '+industry+' companies in '+location+'...</div>';
+      
+      setTimeout(() => {
+        currentLeads = DEMO_LEADS.map((lead, i) => ({
+          ...lead,
+          id: i,
+          industry: industry
+        }));
+        
+        output.innerHTML = currentLeads.map(lead => `
+          <div class="lead-card" onclick="showEmail(${lead.id})" style="cursor:pointer">
+            <div class="lead-name">${lead.name}</div>
+            <div class="lead-company">${lead.company} • ${lead.location}</div>
+            <span class="lead-score">${lead.score}% Match</span>
+            <div class="lead-meta">
+              <span>${lead.employees} employees</span>
+              <span>${lead.revenue}</span>
+            </div>
+          </div>
+        `).join('');
+      }, 1500);
+    }
+    
+    function showEmail(leadId) {
+      const lead = currentLeads.find(l => l.id === leadId);
+      const output = document.getElementById('email-output');
+      const status = document.getElementById('email-status');
+      
+      status.textContent = 'Writing...';
+      
+      setTimeout(() => {
+        status.textContent = 'Ready';
+        
+        output.innerHTML = `
+          <p style="color:#888;font-size:0.8rem;margin-bottom:1rem;">Subject: Quick question about your HVAC marketing</p>
+          <p>Hi ${lead.name.split(' ')[0]},</p>
+          <p>I've been following <span class="highlight">${lead.company}</span> for a while — impressed by the work you guys do in <span class="highlight">${lead.location}</span>.</p>
+          <p>Here's the thing: most <span class="highlight">${lead.industry}</span> companies we talk to are spending <span class="highlight">$${Math.floor(Math.random()*3+2)}K/mo</span> on leads and still struggling to get quality.</p>
+          <p>We helped a company similar to yours — <span class="highlight">similar size, similar market</span> — go from 20 leads/month to <span class="highlight">85 qualified leads</span> in 90 days.</p>
+          <p>Want me to show you what that could look like for ${lead.company}?</p>
+          <p>— <span class="highlight">15-minute call, no pitch</span></p>
+          <p style="margin-top:1.5rem;color:#666;font-size:0.8rem;">📊 Their score: ${lead.score}% — High likelihood to convert</p>
+        `;
+      }, 800);
+    }
+    
     function selectPlan(plan) {
       document.getElementById('plan').value = plan;
-      document.getElementById('form-title').textContent = 
-        plan === 'starter' ? 'Start Starter Trial' :
-        plan === 'growth' ? 'Start Growth Trial' : 'Scale Plan Inquiry';
     }
     
     document.getElementById('lead-form').addEventListener('submit', function(e) {
       e.preventDefault();
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData);
       
-      const form = e.target;
-      const data = {
-        firstName: form.firstName.value,
-        lastName: form.lastName.value,
-        business: form.business.value,
-        email: form.email.value,
-        phone: form.phone.value,
-        industry: form.industry.value,
-        budget: form.budget.value,
-        notes: form.notes.value,
-        plan: form.plan.value,
-        submitted: new Date().toISOString()
-      };
-      
-      // Save to localStorage (demo - in production, send to backend)
       let leads = JSON.parse(localStorage.getItem('leadflow_leads') || '[]');
-      leads.unshift(data);
+      leads.unshift({ ...data, submitted: new Date().toISOString() });
       localStorage.setItem('leadflow_leads', JSON.stringify(leads));
       
-      // Show success
-      form.style.display = 'none';
+      this.style.display = 'none';
       document.getElementById('success').classList.add('show');
-      
-      console.log('Lead saved:', data);
     });
   </script>
 </body>
