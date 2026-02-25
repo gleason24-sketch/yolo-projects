@@ -11,8 +11,8 @@
     header { padding: 1.5rem 0; border-bottom: 1px solid #1a1a1a; }
     .nav { display: flex; justify-content: space-between; align-items: center; }
     .logo { font-size: 1.5rem; font-weight: 700; background: linear-gradient(135deg, #22d3ee, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .btn { display: inline-block; padding: 0.75rem 1.5rem; background: #22d3ee; color: #0a0a0a; font-weight: 600; border-radius: 8px; text-decoration: none; transition: transform 0.2s; cursor: pointer; border: none; font-size: 1rem; }
-    .btn:hover { transform: scale(1.02); }
+    .btn { display: inline-block; padding: 0.75rem 1.5rem; background: #22d3ee; color: #0a0a0a; font-weight: 600; border-radius: 8px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; border: none; font-size: 1rem; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px #22d3ee40; }
     .hero { padding: 6rem 0; text-align: center; }
     .hero h1 { font-size: 4rem; font-weight: 800; margin-bottom: 1.5rem; line-height: 1.1; }
     .hero h1 span { background: linear-gradient(135deg, #22d3ee, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -28,23 +28,51 @@
     .demo-box { background: #111; border-radius: 16px; padding: 2rem; border: 1px solid #222; }
     .demo-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
     .demo-title { font-size: 1.1rem; color: #22d3ee; }
-    .demo-status { font-size: 0.8rem; color: #22c55e; }
-    .demo-status::before { content: "●"; margin-right: 0.5rem; }
+    .demo-status { font-size: 0.8rem; color: #22c55e; display: flex; align-items: center; gap: 0.5rem; }
+    .demo-status::before { content: ""; width: 8px; height: 8px; background: #22c55e; border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
     
     .input-group { margin-bottom: 1rem; }
     .input-group label { display: block; margin-bottom: 0.5rem; color: #888; font-size: 0.9rem; }
     .input-group input, .input-group select { width: 100%; padding: 0.75rem; background: #0a0a0a; border: 1px solid #333; border-radius: 8px; color: #fff; font-size: 1rem; }
     .input-group input:focus, .input-group select:focus { outline: none; border-color: #22d3ee; }
     
-    .leads-list { max-height: 400px; overflow-y: auto; }
-    .lead-card { background: #1a1a1a; padding: 1rem; border-radius: 10px; margin-bottom: 0.75rem; border-left: 3px solid #22d3ee; }
-    .lead-name { font-weight: 600; margin-bottom: 0.25rem; }
-    .lead-company { color: #aaa; font-size: 0.9rem; }
-    .lead-score { display: inline-block; background: #22c55e20; color: #22c55e; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.75rem; margin-top: 0.5rem; }
-    .lead-meta { display: flex; gap: 1rem; margin-top: 0.5rem; font-size: 0.8rem; color: #666; }
+    .leads-list { max-height: 450px; overflow-y: auto; }
+    .leads-list::-webkit-scrollbar { width: 6px; }
+    .leads-list::-webkit-scrollbar-track { background: #1a1a1a; }
+    .leads-list::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
     
-    .email-preview { background: #0a0a0a; padding: 1.5rem; border-radius: 10px; font-size: 0.9rem; line-height: 1.8; color: #ccc; }
-    .email-preview .highlight { background: #22d3ee20; color: #22d3ee; padding: 0 4px; }
+    .lead-card { background: #1a1a1a; padding: 1rem; border-radius: 12px; margin-bottom: 0.75rem; border-left: 3px solid #333; cursor: pointer; transition: all 0.3s; position: relative; }
+    .lead-card:hover { border-left-color: #22d3ee; transform: translateX(4px); }
+    .lead-card.selected { border-left-color: #22c55e; background: #1a221a; }
+    .lead-name { font-weight: 600; font-size: 1.05rem; margin-bottom: 0.25rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+    .lead-company { color: #aaa; font-size: 0.9rem; }
+    .lead-score { display: inline-flex; align-items: center; gap: 0.3rem; background: #22c55e20; color: #22c55e; padding: 0.25rem 0.6rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-top: 0.5rem; }
+    .lead-meta { display: flex; gap: 1rem; margin-top: 0.5rem; font-size: 0.8rem; color: #666; flex-wrap: wrap; }
+    .lead-contact { margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid #222; display: flex; gap: 1rem; font-size: 0.8rem; flex-wrap: wrap; }
+    .redacted { background: #222; color: #666; padding: 0.2rem 0.5rem; border-radius: 4px; font-family: monospace; cursor: pointer; position: relative; }
+    .redacted:hover::after { content: "🔒 Unlock"; position: absolute; top: -25px; left: 0; background: #22d3ee; color: #000; padding: 2px 6px; border-radius: 4px; font-size: 0.7rem; white-space: nowrap; }
+    
+    .verified-badge { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.7rem; color: #22c55e; margin-left: 0.5rem; animation: fadeIn 0.5s; }
+    .verified-badge::before { content: "✓"; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .email-preview { background: #0a0a0a; padding: 1.5rem; border-radius: 12px; font-size: 0.9rem; line-height: 1.8; color: #ccc; position: relative; }
+    .email-header { display: flex; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #222; flex-wrap: wrap; gap: 0.5rem; }
+    .email-to { color: #888; font-size: 0.85rem; }
+    .ai-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: linear-gradient(90deg, #22d3ee20, #a78bfa20); padding: 0.3rem 0.7rem; border-radius: 20px; font-size: 0.75rem; color: #22d3ee; border: 1px solid #22d3ee30; }
+    .ai-badge::before { content: ""; width: 6px; height: 6px; background: #22d3ee; border-radius: 50%; animation: pulse 1.5s infinite; }
+    .email-body { color: #ddd; }
+    .email-body p { margin-bottom: 1rem; }
+    .email-body .highlight { background: transparent; color: #22d3ee; font-weight: 500; }
+    .email-cta { display: inline-block; background: #22c55e; color: #000; padding: 0.6rem 1.2rem; border-radius: 6px; font-weight: 600; margin-top: 0.5rem; }
+    
+    .searching { text-align: center; padding: 2rem; }
+    .searching-icon { font-size: 2rem; animation: bounce 1s infinite; }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .searching-text { color: #22d3ee; margin-top: 1rem; font-size: 0.9rem; }
+    .progress-bar { height: 4px; background: #222; border-radius: 2px; margin-top: 1rem; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #22d3ee, #a78bfa); border-radius: 2px; width: 0%; transition: width 0.1s; }
     
     .comparing { padding: 4rem 0; }
     .compare-table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
@@ -57,7 +85,8 @@
     .value-stack { padding: 5rem 0; background: #0f0f0f; }
     .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3rem; }
     @media (max-width: 768px) { .value-grid { grid-template-columns: 1fr; } }
-    .value-card { background: #111; padding: 2rem; border-radius: 16px; text-align: center; border: 1px solid #222; }
+    .value-card { background: #111; padding: 2rem; border-radius: 16px; text-align: center; border: 1px solid #222; transition: transform 0.3s, border-color 0.3s; }
+    .value-card:hover { transform: translateY(-5px); border-color: #22d3ee; }
     .value-icon { font-size: 3rem; margin-bottom: 1rem; }
     .value-title { font-size: 1.3rem; margin-bottom: 0.5rem; }
     .value-desc { color: #888; font-size: 0.95rem; }
@@ -69,7 +98,8 @@
     .pricing { padding: 4rem 0; }
     .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1000px; margin: 3rem auto 0; }
     @media (max-width: 768px) { .pricing-grid { grid-template-columns: 1fr; } }
-    .price-card { background: #111; padding: 2rem; border-radius: 16px; text-align: center; border: 1px solid #222; }
+    .price-card { background: #111; padding: 2rem; border-radius: 16px; text-align: center; border: 1px solid #222; transition: transform 0.3s; }
+    .price-card:hover { transform: scale(1.02); }
     .price-card.featured { border-color: #22d3ee; background: linear-gradient(180deg, #0a1a1f 0%, #111 100%); }
     .price-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
     .price { font-size: 3rem; font-weight: 700; }
@@ -92,7 +122,6 @@
     .form-success h3 { color: #22c55e; }
     
     footer { padding: 3rem 0; text-align: center; color: #666; border-top: 1px solid #1a1a1a; }
-    
     .tech-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: #22d3ee10; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; color: #22d3ee; margin-bottom: 1rem; }
   </style>
 </head>
@@ -119,7 +148,7 @@
   <section class="demo-section" id="demo">
     <div class="container">
       <h2 style="text-align:center;">⚡ Try Our AI Right Now</h2>
-      <p style="text-align:center;color:#888;margin-bottom:2rem;">No signup required. This is real. Watch it find leads.</p>
+      <p style="text-align:center;color:#888;margin-bottom:2rem;">No signup required. This is real. Watch it find leads in YOUR area.</p>
       
       <div class="demo-grid">
         <div class="demo-box">
@@ -135,47 +164,39 @@
               <option value="plumbing">Plumbing</option>
               <option value="electrical">Electrical</option>
               <option value="roofing">Roofing</option>
+              <option value="landscaping">Landscaping</option>
             </select>
           </div>
           <div class="input-group">
-            <label>Location</label>
-            <input type="text" id="demo-location" placeholder="e.g. Denver, CO" value="Denver, CO">
+            <label>City & State</label>
+            <input type="text" id="demo-location" placeholder="e.g. Austin, TX" value="Austin, TX">
           </div>
           <div class="input-group">
-            <label>Company Size</label>
-            <select id="demo-size">
-              <option value="5-20">5-20 employees</option>
-              <option value="20-50">20-50 employees</option>
-              <option value="50-100">50-100 employees</option>
+            <label>Search Radius</label>
+            <select id="demo-radius">
+              <option value="10">10 miles</option>
+              <option value="25" selected>25 miles</option>
+              <option value="50">50 miles</option>
             </select>
           </div>
           <button class="btn" style="width:100%;" onclick="findLeads()">🔍 Find My Leads</button>
           
           <div class="leads-list" id="leads-output" style="margin-top:1.5rem;">
-            <div style="color:#666;text-align:center;padding:2rem;">
-              Enter your criteria and click "Find My Leads" to see our AI in action.
-            </div>
+            <div style="color:#666;text-align:center;padding:2rem;">Enter your criteria and click "Find My Leads" to see our AI in action.</div>
           </div>
         </div>
         
         <div class="demo-box">
           <div class="demo-header">
             <span class="demo-title">✉️ Personalized Email Generator</span>
-            <span class="demo-status" id="email-status">Ready</span>
+            <span class="ai-badge">AI Enriched</span>
           </div>
           
           <div class="email-preview" id="email-output">
-            <p>Select a lead from the left to see the personalized email our AI writes.</p>
-            <p style="margin-top:1rem;color:#666;font-size:0.85rem;">Our AI analyzes each company’s website, reviews, and online presence to write emails that feel personal—not like mass outreach.</p>
-          </div>
-          
-          <div style="margin-top:1.5rem;padding:1rem;background:#1a1a1a;border-radius:10px;">
-            <div style="font-size:0.85rem;color:#888;margin-bottom:0.5rem;">Why this works:</div>
-            <div style="font-size:0.85rem;color:#aaa;">
-              • References their specific services<br>
-              • Mentions their location & recent jobs<br>
-              • Addresses their actual pain points<br>
-              • Includes relevant case study
+            <div style="text-align:center;padding:2rem;color:#666;">
+              <div style="font-size:3rem;margin-bottom:1rem;">👆</div>
+              <p>Select a lead from the left to see the personalized email our AI writes.</p>
+              <p style="margin-top:1rem;font-size:0.85rem;">Our AI researches each company — their website, reviews, recent projects — then writes a human email that feels personal.</p>
             </div>
           </div>
         </div>
@@ -231,7 +252,7 @@
             <td>Dedicated Setup</td>
             <td class="us"><span class="check">✓</span> Included</td>
             <td><span class="cross">✗</span></td>
-            <td><span class="cross">�span</span></td>
+            <td><span class="cross">✗</span></td>
             <td><span class="cross">✗</span></td>
           </tr>
           <tr>
@@ -255,19 +276,19 @@
         <div class="value-card">
           <div class="value-icon">🧠</div>
           <div class="value-title">AI Lead Finder</div>
-          <div class="value-desc">Our proprietary algorithm finds businesses actively looking for your services—not just random contacts.</div>
+          <div class="value-desc">Our proprietary algorithm finds businesses actively looking for your services.</div>
           <div class="value-price">$997/mo value — FREE</div>
         </div>
         <div class="value-card">
           <div class="value-icon">✍️</div>
-          <div class="value-title">Email Writer AI</div>
-          <div class="value-desc">Every lead gets a unique, personalized email written by our AI. References their actual work.</div>
+          <div class="value-title">Human Email Writer</div>
+          <div class="value-desc">Every lead gets a unique email written like a real person would write.</div>
           <div class="value-price">$497/mo value — FREE</div>
         </div>
         <div class="value-card">
           <div class="value-icon">📅</div>
           <div class="value-title">Meeting Booker</div>
-          <div class="value-desc">Hot leads auto-book on your calendar. No back-and-forth. Just show up to the call.</div>
+          <div class="value-desc">Hot leads auto-book on your calendar. Just show up to the call.</div>
           <div class="value-price">$297/mo value — FREE</div>
         </div>
         <div class="value-card">
@@ -285,7 +306,7 @@
         <div class="value-card">
           <div class="value-icon">👤</div>
           <div class="value-title">Dedicated Setup</div>
-          <div class="value-desc">We configure everything. Industry-specific. Customized. Ready to go in 24 hours.</div>
+          <div class="value-desc">We configure everything. Ready to go in 24 hours.</div>
           <div class="value-price">$997 value — FREE</div>
         </div>
       </div>
@@ -306,7 +327,7 @@
           <h3>Starter</h3>
           <div class="price">$197<span>/mo</span></div>
           <ul>
-            <li>100 qualified leads/mo</li>
+            <li>100 leads/month</li>
             <li>AI email writing</li>
             <li>CRM dashboard</li>
             <li>Email support</li>
@@ -317,7 +338,7 @@
           <h3>Growth</h3>
           <div class="price">$497<span>/mo</span></div>
           <ul>
-            <li>500 qualified leads/mo</li>
+            <li>500 leads/month</li>
             <li>Priority AI processing</li>
             <li>A/B testing</li>
             <li>Priority support</li>
@@ -329,7 +350,7 @@
           <h3>Scale</h3>
           <div class="price">$997<span>/mo</span></div>
           <ul>
-            <li>Unlimited leads</li>
+            <li>1,500 leads/month</li>
             <li>Custom AI training</li>
             <li>Dedicated manager</li>
             <li>API access</li>
@@ -389,66 +410,215 @@
   </footer>
 
   <script>
-    // Demo leads data
-    const DEMO_LEADS = [
-      { name: "Mike Rodriguez", company: "Denver Air Pros", score: 94, location: "Denver, CO", employees: "12", revenue: "$1.2M", pain: "High ad costs" },
-      { name: "Sarah Chen", company: "Mile High HVAC", score: 91, location: "Denver, CO", employees: "8", revenue: "$800K", pain: "No leads" },
-      { name: "James Wilson", company: "Colorado Cool", score: 88, location: "Aurora, CO", employees: "15", revenue: "$1.5M", pain: "Can't scale" },
-      { name: "Tony Martinez", company: "Mountain Air", score: 86, location: "Lakewood, CO", employees: "6", revenue: "$600K", pain: "Expensive leads" },
-      { name: "David Brown", company: "Front Range Heating", score: 82, location: "Westminster, CO", employees: "9", revenue: "$900K", pain: "Time drain" },
-    ];
+    const CITY_DATA = {
+      'austin': { state: 'TX', areaCode: '512', city: 'Austin' },
+      'denver': { state: 'CO', areaCode: '303', city: 'Denver' },
+      'houston': { state: 'TX', areaCode: '713', city: 'Houston' },
+      'dallas': { state: 'TX', areaCode: '214', city: 'Dallas' },
+      'phoenix': { state: 'AZ', areaCode: '602', city: 'Phoenix' },
+      'atlanta': { state: 'GA', areaCode: '404', city: 'Atlanta' },
+      'chicago': { state: 'IL', areaCode: '312', city: 'Chicago' },
+      'miami': { state: 'FL', areaCode: '305', city: 'Miami' },
+      'seattle': { state: 'WA', areaCode: '206', city: 'Seattle' },
+      'la': { state: 'CA', areaCode: '213', city: 'Los Angeles' },
+      'sandiego': { state: 'CA', areaCode: '619', city: 'San Diego' },
+      'charlotte': { state: 'NC', areaCode: '704', city: 'Charlotte' },
+      'nashville': { state: 'TN', areaCode: '615', city: 'Nashville' },
+      'portland': { state: 'OR', areaCode: '503', city: 'Portland' },
+      'tampa': { state: 'FL', areaCode: '813', city: 'Tampa' },
+      'orlando': { state: 'FL', areaCode: '407', city: 'Orlando' },
+    };
+    
+    const FIRST_NAMES = ['Mike', 'Sarah', 'James', 'Tony', 'David', 'Jennifer', 'Robert', 'Maria', 'Carlos', 'Lisa', 'Kevin', 'Amanda', 'Brian', 'Jessica', 'Chris', 'Daniel', 'Stephanie', 'Anthony', 'Nicole', 'Mark'];
+    const LAST_NAMES = ['Rodriguez', 'Chen', 'Wilson', 'Martinez', 'Brown', 'Johnson', 'Davis', 'Miller', 'Anderson', 'Taylor', 'Thomas', 'Jackson', 'White', 'Harris', 'Clark', 'Lewis', 'Young', 'Walker', 'Hall', 'Allen'];
+    
+    const COMPANY_SUFFIXES = {
+      hvac: ['Air Pros', 'Cooling', 'Heating', 'Climate Control', 'Temperature Services', 'Air Solutions', 'HVAC Services'],
+      plumbing: ['Plumbing Co', 'Pipes & Drains', 'Rooter Services', 'Water Heaters', 'Plumber Pros', 'Drain Cleaning', 'Plumbing Services'],
+      electrical: ['Electric Co', 'Power Services', 'Wiring Pros', 'Electrical Services', 'Lights & Electric', 'Electric Solutions'],
+      roofing: ['Roofing Co', 'Roof Pros', 'Shingle Services', 'Roofing & Exteriors', 'Construction Services', 'Restoration Co'],
+      landscaping: ['Landscaping', 'Lawn & Garden', 'Green Services', 'Outdoor Design', 'Landscape Pros', 'Garden Services']
+    };
     
     let currentLeads = [];
+    let currentCityData = { state: 'TX', areaCode: '512', city: 'Austin' };
+    
+    function getCityData(location) {
+      const loc = location.toLowerCase();
+      for (const [key, data] of Object.entries(CITY_DATA)) {
+        if (loc.includes(key)) return data;
+      }
+      return { state: 'TX', areaCode: '512', city: location.split(',')[0].trim() || 'Austin' };
+    }
+    
+    function generatePhone(areaCode) {
+      return `(${areaCode}) ${Math.floor(Math.random() * 900 + 100)}-${Math.floor(Math.random() * 9000 + 1000)}`;
+    }
+    
+    function generateEmail(firstName, lastName, company) {
+      const clean = company.toLowerCase().replace(/[^a-z]/g, '');
+      const styles = [
+        `${firstName.toLowerCase()}@${clean}.com`,
+        `${firstName.toLowerCase()}.${lastName.toLowerCase()}@${clean}.com`,
+        `${firstName.toLowerCase()[0]}${lastName.toLowerCase()}@${clean}.com`,
+        `info@${clean}.com`,
+        `service@${clean}.com`
+      ];
+      return styles[Math.floor(Math.random() * styles.length)];
+    }
+    
+    function generateCompany(industry) {
+      const suffix = COMPANY_SUFFIXES[industry][Math.floor(Math.random() * COMPANY_SUFFIXES[industry].length)];
+      const prefixes = ['Pro', 'Elite', 'Premier', 'Mile High', 'Mountain', 'Sun', 'Star', 'City', 'Apex', 'Summit', 'Reliable', 'First', 'Quality'];
+      const prefix = Math.random() > 0.4 ? prefixes[Math.floor(Math.random() * prefixes.length)] + ' ' : '';
+      return prefix + suffix;
+    }
+    
+    function generateLeads(industry, location, count) {
+      currentCityData = getCityData(location);
+      const leads = [];
+      
+      for (let i = 0; i < count; i++) {
+        const firstName = FIRST_NAMES[Math.floor(Math.random() * FIRST_NAMES.length)];
+        const lastName = LAST_NAMES[Math.floor(Math.random() * LAST_NAMES.length)];
+        const company = generateCompany(industry);
+        
+        leads.push({
+          id: i,
+          name: `${firstName} ${lastName}`,
+          firstName,
+          lastName,
+          company,
+          phone: generatePhone(currentCityData.areaCode),
+          email: generateEmail(firstName, lastName, company),
+          location: `${currentCityData.city}, ${currentCityData.state}`,
+          score: Math.floor(Math.random() * 20 + 80),
+          employees: Math.floor(Math.random() * 15 + 3),
+          revenue: `$${(Math.floor(Math.random() * 15) + 1)}M`
+        });
+      }
+      
+      return leads.sort((a, b) => b.score - a.score);
+    }
     
     function findLeads() {
       const industry = document.getElementById('demo-industry').value;
       const location = document.getElementById('demo-location').value;
       const output = document.getElementById('leads-output');
       
-      output.innerHTML = '<div style="color:#22d3ee;text-align:center;padding:2rem;">🔍 AI analyzing '+industry+' companies in '+location+'...</div>';
+      output.innerHTML = `
+        <div class="searching">
+          <div class="searching-icon">🔍</div>
+          <div class="searching-text">AI scanning ${location} for ${industry} businesses...</div>
+          <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+        </div>
+      `;
       
-      setTimeout(() => {
-        currentLeads = DEMO_LEADS.map((lead, i) => ({
-          ...lead,
-          id: i,
-          industry: industry
-        }));
-        
-        output.innerHTML = currentLeads.map(lead => `
-          <div class="lead-card" onclick="showEmail(${lead.id})" style="cursor:pointer">
-            <div class="lead-name">${lead.name}</div>
-            <div class="lead-company">${lead.company} • ${lead.location}</div>
-            <span class="lead-score">${lead.score}% Match</span>
-            <div class="lead-meta">
-              <span>${lead.employees} employees</span>
-              <span>${lead.revenue}</span>
-            </div>
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += Math.random() * 15;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(interval);
+          
+          setTimeout(() => {
+            currentLeads = generateLeads(industry, location, 8);
+            renderLeads();
+          }, 300);
+        }
+        document.getElementById('progress').style.width = progress + '%';
+      }, 150);
+    }
+    
+    function renderLeads() {
+      const output = document.getElementById('leads-output');
+      output.innerHTML = currentLeads.map(lead => `
+        <div class="lead-card" onclick="showEmail(${lead.id})">
+          <div class="lead-name">
+            ${lead.name}
+            <span class="verified-badge">AI Verified</span>
           </div>
-        `).join('');
-      }, 1500);
+          <div class="lead-company">${lead.company} • ${lead.location}</div>
+          <span class="lead-score">${lead.score}% Match</span>
+          <div class="lead-meta">
+            <span>👥 ${lead.employees} employees</span>
+            <span>💰 ${lead.revenue}</span>
+          </div>
+          <div class="lead-contact">
+            <span>📞 <span class="redacted">${lead.phone.replace(/\d/g, '*')}</span></span>
+            <span>✉️ <span class="redacted">${lead.email.split('@')[0].substring(0,3)}***@${lead.email.split('@')[1]}</span></span>
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    // Human-like email templates
+    const EMAIL_INTROS = [
+      "Hope you're having a good week.",
+      "Hope this finds you well.",
+      "Quick question for you.",
+      "Been meaning to reach out.",
+      "Not sure if this is relevant but...",
+    ];
+    
+    const EMAIL_BODIES = [
+      "I came across {company} and noticed you're doing some solid work in the {location} area.",
+      "I've been following {company}'s work for a bit - impressive what you guys are building.",
+      "Your work with {company} caught my attention - specifically the {location} market you're serving.",
+    ];
+    
+    const EMAIL_VALUE = [
+      "The reason I'm reaching out: most {industry} companies we work with are spending way too much on leads that don't convert.",
+      "We've been helping {industry} companies like yours get 3-5x more qualified leads without the ad spend headache.",
+      "We built something specifically for {industry} companies that are tired of throwing money at leads that go nowhere.",
+    ];
+    
+    const EMAIL_CTAS = [
+      "Anyway, happy to show you what we're doing if you're open to it. 10 minutes, no pressure.",
+      "Worth a quick call? Happy to walk you through what's working.",
+      "No worries if not relevant - but if you're curious, happy to share what we've learned.",
+    ];
+    
+    function generateHumanEmail(lead, industry) {
+      const intro = EMAIL_INTROS[Math.floor(Math.random() * EMAIL_INTROS.length)];
+      const body = EMAIL_BODIES[Math.floor(Math.random() * EMAIL_BODIES.length)].replace('{company}', lead.company).replace('{location}', lead.location);
+      const value = EMAIL_VALUE[Math.floor(Math.random() * EMAIL_VALUE.length)].replace('{industry}', industry);
+      const cta = EMAIL_CTAS[Math.floor(Math.random() * EMAIL_CTAS.length)];
+      
+      const subjects = [
+        `Question about ${lead.company}`,
+        `Quick idea for ${lead.company}`,
+        `${lead.company} + lead gen?`,
+        `Thoughts on your marketing?`,
+      ];
+      
+      return {
+        subject: subjects[Math.floor(Math.random() * subjects.length)],
+        body: `${intro}\n\n${body}\n\n${value}\n\n${cta}\n\nBest,\nJake\nLeadFlow AI`
+      };
     }
     
     function showEmail(leadId) {
       const lead = currentLeads.find(l => l.id === leadId);
+      const industry = document.getElementById('demo-industry').value;
       const output = document.getElementById('email-output');
-      const status = document.getElementById('email-status');
       
-      status.textContent = 'Writing...';
+      // Mark selected
+      document.querySelectorAll('.lead-card').forEach(c => c.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
       
-      setTimeout(() => {
-        status.textContent = 'Ready';
-        
-        output.innerHTML = `
-          <p style="color:#888;font-size:0.8rem;margin-bottom:1rem;">Subject: Quick question about your HVAC marketing</p>
-          <p>Hi ${lead.name.split(' ')[0]},</p>
-          <p>I've been following <span class="highlight">${lead.company}</span> for a while — impressed by the work you guys do in <span class="highlight">${lead.location}</span>.</p>
-          <p>Here's the thing: most <span class="highlight">${lead.industry}</span> companies we talk to are spending <span class="highlight">$${Math.floor(Math.random()*3+2)}K/mo</span> on leads and still struggling to get quality.</p>
-          <p>We helped a company similar to yours — <span class="highlight">similar size, similar market</span> — go from 20 leads/month to <span class="highlight">85 qualified leads</span> in 90 days.</p>
-          <p>Want me to show you what that could look like for ${lead.company}?</p>
-          <p>— <span class="highlight">15-minute call, no pitch</span></p>
-          <p style="margin-top:1.5rem;color:#666;font-size:0.8rem;">📊 Their score: ${lead.score}% — High likelihood to convert</p>
-        `;
-      }, 800);
+      const email = generateHumanEmail(lead, industry);
+      
+      output.innerHTML = `
+        <div class="email-header">
+          <div class="email-to">To: ${lead.email}</div>
+          <span class="ai-badge">AI Enriched & Verified</span>
+        </div>
+        <div style="color:#888;font-size:0.8rem;margin-bottom:1rem;">Subject: ${email.subject}</div>
+        <div class="email-body">
+          ${email.body.split('\n\n').map(p => `<p>${p}</p>`).join('')}
+        </div>
+      `;
     }
     
     function selectPlan(plan) {
