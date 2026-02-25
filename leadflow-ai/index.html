@@ -11,7 +11,7 @@
     header { padding: 1.5rem 0; border-bottom: 1px solid #1a1a1a; }
     .nav { display: flex; justify-content: space-between; align-items: center; }
     .logo { font-size: 1.5rem; font-weight: 700; background: linear-gradient(135deg, #22d3ee, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .btn { display: inline-block; padding: 0.75rem 1.5rem; background: #22d3ee; color: #0a0a0a; font-weight: 600; border-radius: 8px; text-decoration: none; transition: transform 0.2s; }
+    .btn { display: inline-block; padding: 0.75rem 1.5rem; background: #22d3ee; color: #0a0a0a; font-weight: 600; border-radius: 8px; text-decoration: none; transition: transform 0.2s; cursor: pointer; border: none; }
     .btn:hover { transform: scale(1.05); }
     .hero { padding: 5rem 0; text-align: center; }
     .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.1; }
@@ -38,54 +38,66 @@
     .price-card ul { list-style: none; margin: 1.5rem 0; text-align: left; }
     .price-card li { padding: 0.5rem 0; color: #aaa; font-size: 0.9rem; }
     .price-card li::before { content: "✓"; color: #22d3ee; margin-right: 0.5rem; }
-    .guarantee { background: #111; padding: 3rem; border-radius: 12px; text-align: center; margin: 3rem 0; border: 1px solid #22d3ee; }
-    .guarantee h3 { color: #22d3ee; margin-bottom: 1rem; }
-    .proof { padding: 4rem 0; }
+    .guarantee { background: #111; padding: 2rem; border-radius: 12px; text-align: center; margin: 3rem auto; max-width: 600px; border: 1px solid #22d3ee; }
+    .guarantee h3 { color: #22d3ee; margin-bottom: 0.5rem; }
     .proof-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
     @media (max-width: 600px) { .proof-stats { grid-template-columns: repeat(2, 1fr); } }
     .stat-number { font-size: 3rem; font-weight: 700; color: #22d3ee; }
     .stat-label { color: #888; font-size: 0.9rem; }
+    .form-section { padding: 4rem 0; background: #0f0f0f; }
+    .form-container { max-width: 500px; margin: 0 auto; background: #111; padding: 2rem; border-radius: 16px; }
+    .form-group { margin-bottom: 1.5rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; color: #aaa; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 0.75rem; background: #0a0a0a; border: 1px solid #333; border-radius: 8px; color: #fff; font-size: 1rem; font-family: inherit; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #22d3ee; }
+    .form-title { font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center; }
+    .testimonial { background: #111; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem; border-left: 3px solid #22d3ee; }
+    .testimonial p { font-style: italic; color: #ccc; margin-bottom: 0.5rem; }
+    .testimonial cite { color: #666; font-size: 0.85rem; }
+    .testimonials { max-width: 800px; margin: 0 auto; }
     footer { padding: 3rem 0; text-align: center; color: #666; border-top: 1px solid #1a1a1a; }
+    .form-success { display: none; text-align: center; padding: 2rem; }
+    .form-success.show { display: block; }
+    .form-success h3 { color: #22c55e; margin-bottom: 1rem; }
   </style>
 </head>
 <body>
   <header>
     <div class="container nav">
       <div class="logo">LeadFlow AI</div>
-      <a href="#pricing" class="btn">Get Started</a>
+      <a href="#pricing" class="btn">View Pricing</a>
     </div>
   </header>
 
   <section class="hero">
     <div class="container">
-      <h1>Your Prospecting Department<br><span>Never Sleeps</span></h1>
-      <p>AI-powered lead generation that finds leads, validates emails, and sends outreach — while you rest. Wake up to booked demos.</p>
+      <h1>Your Sales Team<br><span>Never Sleeps</span></h1>
+      <p>We find your ideal customers, send personalized outreach, and book meetings on your calendar. You wake up to qualified leads.</p>
       <div class="cta">
-        <a href="#pricing" class="btn btn-primary">Start Free Trial</a>
-        <a href="#proof" class="btn btn-secondary">See Results</a>
+        <a href="#signup" class="btn btn-primary">Start Free Trial</a>
+        <a href="#how" class="btn btn-secondary">How It Works</a>
       </div>
     </div>
   </section>
 
-  <section class="section" id="proof">
+  <section class="section" id="how">
     <div class="container">
-      <h2>Proven Results</h2>
-      <div class="proof-stats">
-        <div>
-          <div class="stat-number">325%</div>
-          <div class="stat-label">More Leads</div>
+      <h2>How LeadFlow Works</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="card-icon">🎯</div>
+          <h3>1. We Find Your Customers</h3>
+          <p>We identify businesses that match your ideal customer profile using our proprietary data systems.</p>
         </div>
-        <div>
-          <div class="stat-number">85%</div>
-          <div class="stat-label">Lower Cost</div>
+        <div class="card">
+          <div class="card-icon">✉️</div>
+          <h3>2. Personalized Outreach</h3>
+          <p>Every prospect gets a custom email referencing their specific business, industry, and pain points.</p>
         </div>
-        <div>
-          <div class="stat-number">18x</div>
-          <div class="stat-label">ROI</div>
-        </div>
-        <div>
-          <div class="stat-number">80%</div>
-          <div class="stat-label">Less Time</div>
+        <div class="card">
+          <div class="card-icon">📅</div>
+          <h3>3. Meetings Booked</h3>
+          <p>Interested leads are routed directly to your calendar. You just show up to the call.</p>
         </div>
       </div>
     </div>
@@ -93,37 +105,31 @@
 
   <section class="section">
     <div class="container">
-      <h2>What's Included</h2>
-      <div class="grid">
-        <div class="card">
-          <div class="card-icon">🔍</div>
-          <h3>Unlimited Leads</h3>
-          <p>Hunter.io integration for unlimited searches. Find your ideal customers instantly.</p>
+      <h2>Results That Matter</h2>
+      <div class="proof-stats">
+        <div><div class="stat-number">325%</div><div class="stat-label">More Leads</div></div>
+        <div><div class="stat-number">85%</div><div class="stat-label">Lower Cost</div></div>
+        <div><div class="stat-number">18x</div><div class="stat-label">ROI</div></div>
+        <div><div class="stat-number">80%</div><div class="stat-label">Less Time</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>What Clients Say</h2>
+      <div class="testimonials">
+        <div class="testimonial">
+          <p>"We went from 10 leads/month to 85 qualified leads. The ROI is 10x. Best investment we've made in our business."</p>
+          <cite>— HVAC Company Owner, Denver</cite>
         </div>
-        <div class="card">
-          <div class="card-icon">✓</div>
-          <h3>Email Verification</h3>
-          <p>95%+ accurate email verification. Zero bounced emails.</p>
+        <div class="testimonial">
+          <p>"Finally, a system that actually works. I wake up to booked demos every morning. It's like having a sales team that never sleeps."</p>
+          <cite>— Plumbing Company Owner, Austin</cite>
         </div>
-        <div class="card">
-          <div class="card-icon">✉️</div>
-          <h3>Personalized Outreach</h3>
-          <p>AI-crafted emails that don't sound like spam. Each one tailored to the prospect.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">📊</div>
-          <h3>CRM Dashboard</h3>
-          <p>Track every lead, every email, every response in one place.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">⚙️</div>
-          <h3>Setup Included</h3>
-          <p>We set everything up. Industry customization, sequences, CRM. All included.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon">🎯</div>
-          <h3>Targeted Industries</h3>
-          <p>HVAC, Plumbing, Landscaping, Cleaning, Medical, Real Estate, and more.</p>
+        <div class="testimonial">
+          <p>"We cancelled our $3,000/mo Google Ads because LeadFlow delivers better leads at a fraction of the cost."</p>
+          <cite>— Landscaping Company Owner, Phoenix</cite>
         </div>
       </div>
     </div>
@@ -131,66 +137,112 @@
 
   <section class="pricing" id="pricing">
     <div class="container">
-      <h2>Simple Pricing</h2>
-      <div class="guarantee">
-        <h3>🛡️ 30-Day Money-Back Guarantee</h3>
-        <p>No questions asked. No contracts. Cancel anytime.</p>
-      </div>
+      <h2>Choose Your Plan</h2>
       <div class="pricing-grid">
         <div class="price-card">
           <h3>Starter</h3>
           <div class="price">$197<span>/mo</span></div>
           <ul>
-            <li>100 leads/month</li>
-            <li>Email verification</li>
-            <li>Basic sequences</li>
+            <li>100 qualified leads/month</li>
+            <li>Personalized outreach</li>
             <li>Email support</li>
+            <li>Basic reporting</li>
           </ul>
-          <a href="#" class="btn">Start Free</a>
+          <a href="#signup" class="btn" onclick="selectPlan('starter')">Start Free Trial</a>
         </div>
         <div class="price-card featured">
           <h3>Growth</h3>
           <div class="price">$497<span>/mo</span></div>
           <ul>
-            <li>500 leads/month</li>
-            <li>Email verification</li>
+            <li>500 qualified leads/month</li>
             <li>Advanced sequences</li>
             <li>Priority support</li>
+            <li>A/B testing</li>
             <li><strong>FREE Setup ($997 value)</strong></li>
           </ul>
-          <a href="#" class="btn btn-primary">Start Free</a>
+          <a href="#signup" class="btn btn-primary" onclick="selectPlan('growth')">Start Free Trial</a>
         </div>
         <div class="price-card">
           <h3>Scale</h3>
           <div class="price">$997<span>/mo</span></div>
           <ul>
             <li>Unlimited leads</li>
-            <li>Unlimited verifications</li>
             <li>Custom development</li>
-            <li>Dedicated manager</li>
+            <li>Dedicated account manager</li>
             <li>API access</li>
           </ul>
-          <a href="#" class="btn">Contact Sales</a>
+          <a href="#signup" class="btn" onclick="selectPlan('scale')">Contact Sales</a>
         </div>
+      </div>
+      <div class="guarantee">
+        <h3>🛡️ 30-Day Money-Back Guarantee</h3>
+        <p>No questions asked. No contracts. Cancel anytime.</p>
       </div>
     </div>
   </section>
 
-  <section class="proof">
+  <section class="form-section" id="signup">
     <div class="container">
-      <h2>What Clients Say</h2>
-      <div class="grid">
-        <div class="card">
-          <p>"We went from 10 leads/month to 85. The ROI is 10x. Best investment we've made."</p>
-          <p style="margin-top:1rem;color:#666;font-size:0.85rem;">— HVAC Company Owner</p>
-        </div>
-        <div class="card">
-          <p>"Finally, a system that works while we sleep. Leads every morning."</p>
-          <p style="margin-top:1rem;color:#666;font-size:0.85rem;">— Plumbing Company Owner</p>
-        </div>
-        <div class="card">
-          <p>"Cancelled our $3K/mo ad spend because LeadFlow delivers better leads."</p>
-          <p style="margin-top:1rem;color:#666;font-size:0.85rem;">— Landscaping Company Owner</p>
+      <div class="form-container">
+        <h2 class="form-title" id="form-title">Start Your Free Trial</h2>
+        <form id="lead-form">
+          <input type="hidden" id="plan" name="plan" value="starter">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" name="firstName" required placeholder="John">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" name="lastName" required placeholder="Smith">
+          </div>
+          <div class="form-group">
+            <label>Business Name</label>
+            <input type="text" name="business" required placeholder="ABC Company">
+          </div>
+          <div class="form-group">
+            <label>Work Email</label>
+            <input type="email" name="email" required placeholder="john@company.com">
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" name="phone" placeholder="(555) 123-4567">
+          </div>
+          <div class="form-group">
+            <label>Industry</label>
+            <select name="industry" required>
+              <option value="">Select industry...</option>
+              <option value="HVAC">HVAC / Heating & Cooling</option>
+              <option value="Plumbing">Plumbing</option>
+              <option value="Electrical">Electrical</option>
+              <option value="Roofing">Roofing</option>
+              <option value="Landscaping">Landscaping</option>
+              <option value="Cleaning">Cleaning Services</option>
+              <option value="Pest Control">Pest Control</option>
+              <option value="Real Estate">Real Estate</option>
+              <option value="Dental">Dental</option>
+              <option value="Medical">Medical</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Monthly Marketing Budget</label>
+            <select name="budget" required>
+              <option value="">Select budget...</option>
+              <option value="Under $200">Under $200/mo</option>
+              <option value="$200-$500">$200 - $500/mo</option>
+              <option value="$500-$1000">$500 - $1,000/mo</option>
+              <option value="Over $1000">Over $1,000/mo</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Anything else we should know?</label>
+            <textarea name="notes" rows="3" placeholder="Tell us about your business..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Submit Application</button>
+        </form>
+        <div class="form-success" id="success">
+          <h3>✓ Application Received!</h3>
+          <p>Thanks for your interest in LeadFlow. We'll be in touch within 24 hours to schedule your demo call.</p>
         </div>
       </div>
     </div>
@@ -201,5 +253,43 @@
       <p>© 2026 LeadFlow AI. All rights reserved.</p>
     </div>
   </footer>
+
+  <script>
+    function selectPlan(plan) {
+      document.getElementById('plan').value = plan;
+      document.getElementById('form-title').textContent = 
+        plan === 'starter' ? 'Start Starter Trial' :
+        plan === 'growth' ? 'Start Growth Trial' : 'Scale Plan Inquiry';
+    }
+    
+    document.getElementById('lead-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const form = e.target;
+      const data = {
+        firstName: form.firstName.value,
+        lastName: form.lastName.value,
+        business: form.business.value,
+        email: form.email.value,
+        phone: form.phone.value,
+        industry: form.industry.value,
+        budget: form.budget.value,
+        notes: form.notes.value,
+        plan: form.plan.value,
+        submitted: new Date().toISOString()
+      };
+      
+      // Save to localStorage (demo - in production, send to backend)
+      let leads = JSON.parse(localStorage.getItem('leadflow_leads') || '[]');
+      leads.unshift(data);
+      localStorage.setItem('leadflow_leads', JSON.stringify(leads));
+      
+      // Show success
+      form.style.display = 'none';
+      document.getElementById('success').classList.add('show');
+      
+      console.log('Lead saved:', data);
+    });
+  </script>
 </body>
 </html>
