@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LeadFlow CRM</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0a0a; color: #fff; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 1rem; }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-bottom: 1px solid #222; }
+    h1 { font-size: 1.5rem; background: linear-gradient(90deg, #22d3ee, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .btn { padding: 0.5rem 1rem; background: #22d3ee; color: #000; border: none; border-radius: 6px; cursor: pointer; }
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 2rem 0; }
+    .stat { background: #111; padding: 1.5rem; border-radius: 12px; text-align: center; }
+    .stat-num { font-size: 2rem; font-weight: 700; color: #22d3ee; }
+    .stat-label { color: #666; font-size: 0.85rem; }
+    .pipeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; }
+    .stage { background: #111; padding: 1rem; border-radius: 12px; min-height: 200px; }
+    .stage-title { font-size: 0.9rem; color: #888; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #222; }
+    .lead { background: #1a1a1a; padding: 0.75rem; border-radius: 8px; margin-bottom: 0.5rem; cursor: pointer; }
+    .lead:hover { background: #222; }
+    .lead-name { font-weight: 600; margin-bottom: 0.25rem; }
+    .lead-company { font-size: 0.85rem; color: #888; }
+    .lead-email { font-size: 0.75rem; color: #666; }
+    .lead-date { font-size: 0.7rem; color: #444; margin-top: 0.5rem; }
+    .empty { color: #444; font-size: 0.85rem; text-align: center; padding: 2rem; }
+    @media (max-width: 900px) { .pipeline { grid-template-columns: 1fr; } .stats { grid-template-columns: repeat(2, 1fr); } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>LeadFlow CRM</h1>
+      <button class="btn" onclick="loadLeads()">Refresh</button>
+    </header>
+    
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num" id="total">0</div>
+        <div class="stat-label">Total Leads</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="demos">0</div>
+        <div class="stat-label">Demos Scheduled</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="wins">0</div>
+        <div class="stat-label">Won</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="mrr">$0</div>
+        <div class="stat-label">MRR</div>
+      </div>
+    </div>
+    
+    <div class="pipeline" id="pipeline">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+
+  <script>
+    const STAGES = ['New', 'Contacted', 'Demo Scheduled', 'Proposal Sent', 'Won'];
+    
+    function loadLeads() {
+      // Demo data - replace with real CRM integration
+      const leads = JSON.parse(localStorage.getItem('leadflow_leads') || '[]');
+      
+      document.getElementById('total').textContent = leads.length;
+      document.getElementById('demos').textContent = leads.filter(l => l.plan === 'growth').length;
+      document.getElementById('wins').textContent = '0';
+      document.getElementById('mrr').textContent = '$0';
+      
+      const pipeline = document.getElementById('pipeline');
+      pipeline.innerHTML = '';
+      
+      STAGES.forEach(stage => {
+        const stageLeads = leads.filter(l => l.status === stage);
+        const div = document.createElement('div');
+        div.className = 'stage';
+        div.innerHTML = `
+          <div class="stage-title">${stage} (${stageLeads.length})</div>
+          ${stageLeads.length === 0 ? '<div class="empty">No leads</div>' : ''}
+          ${stageLeads.map(l => `
+            <div class="lead">
+              <div class="lead-name">${l.firstName} ${l.lastName}</div>
+              <div class="lead-company">${l.business}</div>
+              <div class="lead-email">${l.email}</div>
+              <div class="lead-date">${new Date(l.submitted).toLocaleDateString()}</div>
+            </div>
+          `).join('')}
+        `;
+        pipeline.appendChild(div);
+      });
+    }
+    
+    loadLeads();
+  </script>
+</body>
+</html>
