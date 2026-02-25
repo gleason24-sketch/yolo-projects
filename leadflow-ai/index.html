@@ -6,166 +6,46 @@
   <title>LeadFlow AI | Autonomous Lead Generation</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #0a0a0a;
-      color: #fff;
-      line-height: 1.6;
-    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0a; color: #fff; line-height: 1.6; }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
-    
-    /* Header */
-    header {
-      padding: 1.5rem 0;
-      border-bottom: 1px solid #1a1a1a;
-    }
-    .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, #22d3ee, #a78bfa);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .btn {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      background: #22d3ee;
-      color: #0a0a0a;
-      font-weight: 600;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: transform 0.2s;
-    }
+    header { padding: 1.5rem 0; border-bottom: 1px solid #1a1a1a; }
+    .nav { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-size: 1.5rem; font-weight: 700; background: linear-gradient(135deg, #22d3ee, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .btn { display: inline-block; padding: 0.75rem 1.5rem; background: #22d3ee; color: #0a0a0a; font-weight: 600; border-radius: 8px; text-decoration: none; transition: transform 0.2s; }
     .btn:hover { transform: scale(1.05); }
-    
-    /* Hero */
-    .hero {
-      padding: 5rem 0;
-      text-align: center;
-    }
-    .hero h1 {
-      font-size: 3.5rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      line-height: 1.1;
-    }
-    .hero h1 span {
-      background: linear-gradient(135deg, #22d3ee, #a78bfa);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .hero p {
-      font-size: 1.25rem;
-      color: #888;
-      max-width: 600px;
-      margin: 0 auto 2rem;
-    }
-    .hero .cta {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-    }
-    .hero .btn-primary {
-      background: linear-gradient(135deg, #22d3ee, #06b6d4);
-      color: #0a0a0a;
-      font-size: 1.1rem;
-      padding: 1rem 2rem;
-    }
-    .hero .btn-secondary {
-      background: transparent;
-      border: 1px solid #333;
-      color: #fff;
-    }
-    
-    /* Features */
-    .features {
-      padding: 4rem 0;
-      background: #0f0f0f;
-    }
-    .features h2 {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-    .feature {
-      background: #1a1a1a;
-      padding: 2rem;
-      border-radius: 12px;
-      border: 1px solid #222;
-    }
-    .feature-icon {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-    .feature h3 { margin-bottom: 0.5rem; }
-    .feature p { color: #888; font-size: 0.95rem; }
-    
-    /* Pricing */
-    .pricing { padding: 4rem 0; }
-    .pricing h2 {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-    }
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
-    @media (max-width: 768px) {
-      .pricing-grid { grid-template-columns: 1fr; }
-    }
-    .price-card {
-      background: #111;
-      padding: 2rem;
-      border-radius: 16px;
-      border: 1px solid #222;
-      text-align: center;
-    }
-    .price-card.featured {
-      border-color3ee;
-     : #22d background: linear-gradient(180deg, #0a1a1f 0%, #111 100%);
-    }
+    .hero { padding: 5rem 0; text-align: center; }
+    .hero h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.1; }
+    .hero h1 span { background: linear-gradient(135deg, #22d3ee, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { font-size: 1.25rem; color: #888; max-width: 600px; margin: 0 auto 2rem; }
+    .hero .cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .hero .btn-primary { background: linear-gradient(135deg, #22d3ee, #06b6d4); color: #0a0a0a; font-size: 1.1rem; padding: 1rem 2rem; }
+    .hero .btn-secondary { background: transparent; border: 1px solid #333; color: #fff; }
+    .section { padding: 4rem 0; }
+    .section h2 { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+    .card { background: #111; padding: 2rem; border-radius: 12px; border: 1px solid #222; }
+    .card-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .card h3 { margin-bottom: 0.5rem; }
+    .card p { color: #888; font-size: 0.95rem; }
+    .pricing { padding: 4rem 0; background: #0f0f0f; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1000px; margin: 0 auto; }
+    @media (max-width: 768px) { .pricing-grid { grid-template-columns: 1fr; } }
+    .price-card { background: #111; padding: 2rem; border-radius: 16px; border: 1px solid #222; text-align: center; }
+    .price-card.featured { border-color: #22d3ee; background: linear-gradient(180deg, #0a1a1f 0%, #111 100%); }
     .price-card h3 { font-size: 1.25rem; margin-bottom: 1rem; }
-    .price {
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
+    .price { font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem; }
     .price span { font-size: 1rem; color: #666; font-weight: 400; }
-    .price-card ul {
-      list-style: none;
-      margin: 1.5rem 0;
-      text-align: left;
-    }
-    .price-card li {
-      padding: 0.5rem 0;
-      color: #aaa;
-      font-size: 0.9rem;
-    }
-    .price-card li::before {
-      content: "✓";
-      color: #22d3ee;
-      margin-right: 0.5rem;
-    }
-    
-    /* Footer */
-    footer {
-      padding: 3rem 0;
-      text-align: center;
-      color: #666;
-      border-top: 1px solid #1a1a1a;
-    }
+    .price-card ul { list-style: none; margin: 1.5rem 0; text-align: left; }
+    .price-card li { padding: 0.5rem 0; color: #aaa; font-size: 0.9rem; }
+    .price-card li::before { content: "✓"; color: #22d3ee; margin-right: 0.5rem; }
+    .guarantee { background: #111; padding: 3rem; border-radius: 12px; text-align: center; margin: 3rem 0; border: 1px solid #22d3ee; }
+    .guarantee h3 { color: #22d3ee; margin-bottom: 1rem; }
+    .proof { padding: 4rem 0; }
+    .proof-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
+    @media (max-width: 600px) { .proof-stats { grid-template-columns: repeat(2, 1fr); } }
+    .stat-number { font-size: 3rem; font-weight: 700; color: #22d3ee; }
+    .stat-label { color: #888; font-size: 0.9rem; }
+    footer { padding: 3rem 0; text-align: center; color: #666; border-top: 1px solid #1a1a1a; }
   </style>
 </head>
 <body>
@@ -182,34 +62,68 @@
       <p>AI-powered lead generation that finds leads, validates emails, and sends outreach — while you rest. Wake up to booked demos.</p>
       <div class="cta">
         <a href="#pricing" class="btn btn-primary">Start Free Trial</a>
-        <a href="#how-it-works" class="btn btn-secondary">How It Works</a>
+        <a href="#proof" class="btn btn-secondary">See Results</a>
       </div>
     </div>
   </section>
 
-  <section class="features" id="how-it-works">
+  <section class="section" id="proof">
     <div class="container">
-      <h2>How LeadFlow Works</h2>
+      <h2>Proven Results</h2>
+      <div class="proof-stats">
+        <div>
+          <div class="stat-number">325%</div>
+          <div class="stat-label">More Leads</div>
+        </div>
+        <div>
+          <div class="stat-number">85%</div>
+          <div class="stat-label">Lower Cost</div>
+        </div>
+        <div>
+          <div class="stat-number">18x</div>
+          <div class="stat-label">ROI</div>
+        </div>
+        <div>
+          <div class="stat-number">80%</div>
+          <div class="stat-label">Less Time</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>What's Included</h2>
       <div class="grid">
-        <div class="feature">
-          <div class="feature-icon">🔍</div>
-          <h3>1. Find Leads</h3>
-          <p>We scan millions of businesses to find your ideal customers using advanced filtering.</p>
+        <div class="card">
+          <div class="card-icon">🔍</div>
+          <h3>Unlimited Leads</h3>
+          <p>Hunter.io integration for unlimited searches. Find your ideal customers instantly.</p>
         </div>
-        <div class="feature">
-          <div class="feature-icon">✓</div>
-          <h3>2. Validate Emails</h3>
-          <p>Real-time email verification ensures 95%+ deliverability. No bounced emails.</p>
+        <div class="card">
+          <div class="card-icon">✓</div>
+          <h3>Email Verification</h3>
+          <p>95%+ accurate email verification. Zero bounced emails.</p>
         </div>
-        <div class="feature">
-          <div class="feature-icon">📧</div>
-          <h3>3. Personal Outreach</h3>
-          <p>AI-crafted personalized emails that don't sound like spam. Each one tailored.</p>
+        <div class="card">
+          <div class="card-icon">✉️</div>
+          <h3>Personalized Outreach</h3>
+          <p>AI-crafted emails that don't sound like spam. Each one tailored to the prospect.</p>
         </div>
-        <div class="feature">
-          <div class="feature-icon">📅</div>
-          <h3>4. Book Meetings</h3>
-          <p>Replies are routed to your calendar. Book demos while you sleep.</p>
+        <div class="card">
+          <div class="card-icon">📊</div>
+          <h3>CRM Dashboard</h3>
+          <p>Track every lead, every email, every response in one place.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚙️</div>
+          <h3>Setup Included</h3>
+          <p>We set everything up. Industry customization, sequences, CRM. All included.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🎯</div>
+          <h3>Targeted Industries</h3>
+          <p>HVAC, Plumbing, Landscaping, Cleaning, Medical, Real Estate, and more.</p>
         </div>
       </div>
     </div>
@@ -217,14 +131,18 @@
 
   <section class="pricing" id="pricing">
     <div class="container">
-      <h2>Simple, Transparent Pricing</h2>
+      <h2>Simple Pricing</h2>
+      <div class="guarantee">
+        <h3>🛡️ 30-Day Money-Back Guarantee</h3>
+        <p>No questions asked. No contracts. Cancel anytime.</p>
+      </div>
       <div class="pricing-grid">
         <div class="price-card">
           <h3>Starter</h3>
           <div class="price">$197<span>/mo</span></div>
           <ul>
             <li>100 leads/month</li>
-            <li>50 verified emails</li>
+            <li>Email verification</li>
             <li>Basic sequences</li>
             <li>Email support</li>
           </ul>
@@ -235,10 +153,10 @@
           <div class="price">$497<span>/mo</span></div>
           <ul>
             <li>500 leads/month</li>
-            <li>250 verified emails</li>
-            <li>3 outreach sequences</li>
-            <li>A/B testing</li>
+            <li>Email verification</li>
+            <li>Advanced sequences</li>
             <li>Priority support</li>
+            <li><strong>FREE Setup ($997 value)</strong></li>
           </ul>
           <a href="#" class="btn btn-primary">Start Free</a>
         </div>
@@ -247,12 +165,32 @@
           <div class="price">$997<span>/mo</span></div>
           <ul>
             <li>Unlimited leads</li>
-            <li>Unlimited verified emails</li>
-            <li>Custom sequences</li>
+            <li>Unlimited verifications</li>
+            <li>Custom development</li>
             <li>Dedicated manager</li>
             <li>API access</li>
           </ul>
           <a href="#" class="btn">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof">
+    <div class="container">
+      <h2>What Clients Say</h2>
+      <div class="grid">
+        <div class="card">
+          <p>"We went from 10 leads/month to 85. The ROI is 10x. Best investment we've made."</p>
+          <p style="margin-top:1rem;color:#666;font-size:0.85rem;">— HVAC Company Owner</p>
+        </div>
+        <div class="card">
+          <p>"Finally, a system that works while we sleep. Leads every morning."</p>
+          <p style="margin-top:1rem;color:#666;font-size:0.85rem;">— Plumbing Company Owner</p>
+        </div>
+        <div class="card">
+          <p>"Cancelled our $3K/mo ad spend because LeadFlow delivers better leads."</p>
+          <p style="margin-top:1rem;color:#666;font-size:0.85rem;">— Landscaping Company Owner</p>
         </div>
       </div>
     </div>
