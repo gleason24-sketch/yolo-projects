@@ -6,215 +6,41 @@
   <title>YOLO Build Dashboard</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: #030712;
-      color: #f8fafc;
-      min-height: 100vh;
-      padding: 2rem;
-    }
-    .container { max-width: 1200px; margin: 0 auto; }
-    h1 {
-      font-size: 2rem;
-      background: linear-gradient(135deg, #22d3ee, #a78bfa, #f472b6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 0.5rem;
-    }
-    .subtitle { color: #94a3b8; margin-bottom: 2rem; }
-    .stats {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-    .stat {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 1rem;
-      padding: 1rem 1.5rem;
-    }
-    .stat-value { font-size: 1.5rem; font-weight: bold; }
-    .stat-label { font-size: 0.75rem; color: #94a3b8; }
-    .filters {
-      display: flex;
-      gap: 0.5rem;
-      margin-bottom: 1.5rem;
-    }
-    .filter {
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.03);
-      color: #94a3b8;
-      cursor: pointer;
-      font-size: 0.875rem;
-    }
-    .filter.active {
-      background: rgba(34,211,238,0.1);
-      border-color: rgba(34,211,238,0.3);
-      color: #22d3ee;
-    }
-    .project {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 1rem;
-      padding: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    .project-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 1rem;
-    }
-    .project-name { font-size: 1.25rem; font-weight: 600; }
-    .project-date { font-size: 0.75rem; color: #64748b; }
-    .project-status {
-      padding: 0.25rem 0.75rem;
-      border-radius: 1rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-    .status-working { background: rgba(34,197,94,0.1); color: #22c55e; }
-    .status-partial { background: rgba(245,158,11,0.1); color: #f59e0b; }
-    .status-failed { background: rgba(239,68,68,0.1); color: #ef4444; }
-    .project-idea { color: #94a3b8; margin-bottom: 1rem; }
-    .project-takeaway { 
-      background: rgba(255,255,255,0.03);
-      padding: 1rem;
-      border-radius: 0.5rem;
-      font-size: 0.875rem;
-    }
-    .project-link {
-      display: inline-block;
-      margin-top: 1rem;
-      color: #22d3ee;
-      text-decoration: none;
-    }
-    .project-link:hover { text-decoration: underline; }
-    .empty { text-align: center; padding: 3rem; color: #64748b; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #fff; min-height: 100vh; padding: 2rem; }
+    .container { max-width: 900px; margin: 0 auto; }
+    h1 { font-size: 2rem; background: linear-gradient(135deg, #22d3ee, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
+    .subtitle { color: #666; margin-bottom: 2rem; }
+    .project { background: #111; border: 1px solid #222; border-radius: 12px; padding: 1.5rem; margin-bottom: 1rem; }
+    .project-name { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .project-date { font-size: 0.75rem; color: #666; margin-bottom: 1rem; }
+    .status { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+    .working { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+    .description { color: #888; margin-bottom: 1rem; }
+    .takeaway { background: #1a1a1a; padding: 1rem; border-radius: 8px; font-size: 0.875rem; }
+    .takeaway strong { color: #22c3ee; }
+    .link { display: inline-block; margin-top: 1rem; color: #22d3ee; text-decoration: none; }
+    .link:hover { text-decoration: underline; }
+    code { background: #222; padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.8rem; }
+    .empty { text-align: center; padding: 3rem; color: #444; }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>🚀 YOLO Build Dashboard</h1>
-    <p class="subtitle">One wild project every night while Scott sleeps</p>
+    <p class="subtitle">Real projects, built and working</p>
     
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-value" id="total">0</div>
-        <div class="stat-label">Total Builds</div>
+    <div class="project">
+      <div class="project-name">Lead Outreach Email Generator</div>
+      <div class="project-date">February 25, 2026</div>
+      <span class="status working">✅ WORKING</span>
+      <p class="description">Node.js script that generates personalized cold outreach emails for Riot Digital leads. Supports multiple industries with custom pain points.</p>
+      <div class="takeaway">
+        <strong>How to use:</strong><br>
+        <code>node generate-email.cjs --company "ABC Plumbing" --industry "plumbing"</code>
       </div>
-      <div class="stat">
-        <div class="stat-value" id="working" style="color:#22c55e">0</div>
-        <div class="stat-label">Working</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value" id="partial" style="color:#f59e0b">0</div>
-        <div class="stat-label">Partial</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value" id="failed" style="color:#ef4444">0</div>
-        <div class="stat-label">Failed</div>
-      </div>
+      <a href="https://github.com/gleason24-sketch/yolo-projects/tree/main/lead-outreach" class="link" target="_blank">View on GitHub →</a>
     </div>
-    
-    <div class="filters">
-      <button class="filter active" data-filter="all">All</button>
-      <button class="filter" data-filter="working">Working</button>
-      <button class="filter" data-filter="partial">Partial</button>
-      <button class="filter" data-filter="failed">Failed</button>
-    </div>
-    
-    <div id="projects"></div>
+
   </div>
-  
-  <script>
-    // Projects data - updated by build script
-    const projects = [
-            {
-        date: "2026-02-25",
-        name: "YOLO Build System",
-        idea: "Build CRM for Pet Sitter Pro - pet sitting software",
-        status: "working",
-        takeaway: "YOLO build system set up. First execution will generate and build a project.",
-        link: "yolo-projects/build-crm-for-pet-sitter-pro--/"
-      },
-            {
-        date: "2026-02-25",
-        name: "YOLO Build System",
-        idea: "Create landing page generator for Gary X Account - streaming persona",
-        status: "working",
-        takeaway: "YOLO build system set up. First execution will generate and build a project.",
-        link: "yolo-projects/create-landing-page-generator-/"
-      },
-            {
-        date: "2026-02-25",
-        name: "YOLO Build System",
-        idea: "Create Instagram/TikTok content generator for Scout Reviews - Amazon affiliate site",
-        status: "working",
-        takeaway: "YOLO build system set up. First execution will generate and build a project.",
-        link: "yolo-projects/create-instagram-tiktok-conten/"
-      },
-      {
-        date: "2026-02-25",
-        name: "Nightly Research Bot",
-        idea: "X search automation to find trending AI topics",
-        status: "working",
-        takeaway: "First test run successful. Cron job set for 2am CST.",
-        link: "yolo-projects/nightly-research/"
-      }
-    ];
-    
-    function render(filter = 'all') {
-      const filtered = filter === 'all' 
-        ? projects 
-        : projects.filter(p => p.status === filter);
-      
-      const stats = {
-        total: projects.length,
-        working: projects.filter(p => p.status === 'working').length,
-        partial: projects.filter(p => p.status === 'partial').length,
-        failed: projects.filter(p => p.status === 'failed').length
-      };
-      
-      document.getElementById('total').textContent = stats.total;
-      document.getElementById('working').textContent = stats.working;
-      document.getElementById('partial').textContent = stats.partial;
-      document.getElementById('failed').textContent = stats.failed;
-      
-      if (filtered.length === 0) {
-        document.getElementById('projects').innerHTML = '<div class="empty">No projects yet</div>';
-        return;
-      }
-      
-      document.getElementById('projects').innerHTML = filtered.map(p => `
-        <div class="project">
-          <div class="project-header">
-            <div>
-              <div class="project-name">${p.name}</div>
-              <div class="project-date">${p.date}</div>
-            </div>
-            <span class="project-status status-${p.status}">${p.status === 'working' ? '✅ Working' : p.status === 'partial' ? '⚠️ Partial' : '❌ Failed'}</span>
-          </div>
-          <p class="project-idea"><strong>Idea:</strong> ${p.idea}</p>
-          <div class="project-takeaway">
-            <strong>Key Takeaway:</strong> ${p.takeaway}
-          </div>
-          ${p.link ? `<a href="${p.link}" class="project-link">View Project →</a>` : ''}
-        </div>
-      `).join('');
-    }
-    
-    document.querySelectorAll('.filter').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        render(btn.dataset.filter);
-      });
-    });
-    
-    render();
-  </script>
 </body>
 </html>
