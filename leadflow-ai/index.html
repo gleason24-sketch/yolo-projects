@@ -411,22 +411,68 @@
 
   <script>
     const CITY_DATA = {
+      // Texas
       'austin': { state: 'TX', areaCode: '512', city: 'Austin' },
-      'denver': { state: 'CO', areaCode: '303', city: 'Denver' },
       'houston': { state: 'TX', areaCode: '713', city: 'Houston' },
       'dallas': { state: 'TX', areaCode: '214', city: 'Dallas' },
+      'san antonio': { state: 'TX', areaCode: '210', city: 'San Antonio' },
+      'fort worth': { state: 'TX', areaCode: '817', city: 'Fort Worth' },
+      // Minnesota
+      'minneapolis': { state: 'MN', areaCode: '612', city: 'Minneapolis' },
+      'st. paul': { state: 'MN', areaCode: '651', city: 'St. Paul' },
+      'st paul': { state: 'MN', areaCode: '651', city: 'St. Paul' },
+      // Missouri
+      'st. louis': { state: 'MO', areaCode: '314', city: 'St. Louis' },
+      'st louis': { state: 'MO', areaCode: '314', city: 'St. Louis' },
+      'kansas city': { state: 'MO', areaCode: '816', city: 'Kansas City' },
+      // Tennessee
+      'nashville': { state: 'TN', areaCode: '615', city: 'Nashville' },
+      'memphis': { state: 'TN', areaCode: '901', city: 'Memphis' },
+      'knoxville': { state: 'TN', areaCode: '865', city: 'Knoxville' },
+      // Indiana
+      'indianapolis': { state: 'IN', areaCode: '317', city: 'Indianapolis' },
+      // Ohio
+      'columbus': { state: 'OH', areaCode: '614', city: 'Columbus' },
+      'cleveland': { state: 'OH', areaCode: '216', city: 'Cleveland' },
+      'cincinnati': { state: 'OH', areaCode: '513', city: 'Cincinnati' },
+      // Wisconsin
+      'milwaukee': { state: 'WI', areaCode: '414', city: 'Milwaukee' },
+      // Michigan
+      'detroit': { state: 'MI', areaCode: '313', city: 'Detroit' },
+      // Massachusetts
+      'boston': { state: 'MA', areaCode: '617', city: 'Boston' },
+      // New York
+      'new york': { state: 'NY', areaCode: '212', city: 'New York' },
+      // Pennsylvania
+      'philadelphia': { state: 'PA', areaCode: '215', city: 'Philadelphia' },
+      // DC/Maryland
+      'washington': { state: 'DC', areaCode: '202', city: 'Washington' },
+      'baltimore': { state: 'MD', areaCode: '410', city: 'Baltimore' },
+      // Other major cities
+      'denver': { state: 'CO', areaCode: '303', city: 'Denver' },
       'phoenix': { state: 'AZ', areaCode: '602', city: 'Phoenix' },
       'atlanta': { state: 'GA', areaCode: '404', city: 'Atlanta' },
       'chicago': { state: 'IL', areaCode: '312', city: 'Chicago' },
       'miami': { state: 'FL', areaCode: '305', city: 'Miami' },
       'seattle': { state: 'WA', areaCode: '206', city: 'Seattle' },
+      'los angeles': { state: 'CA', areaCode: '213', city: 'Los Angeles' },
       'la': { state: 'CA', areaCode: '213', city: 'Los Angeles' },
       'sandiego': { state: 'CA', areaCode: '619', city: 'San Diego' },
       'charlotte': { state: 'NC', areaCode: '704', city: 'Charlotte' },
-      'nashville': { state: 'TN', areaCode: '615', city: 'Nashville' },
       'portland': { state: 'OR', areaCode: '503', city: 'Portland' },
       'tampa': { state: 'FL', areaCode: '813', city: 'Tampa' },
       'orlando': { state: 'FL', areaCode: '407', city: 'Orlando' },
+    };
+    
+    // State abbreviation mapping
+    const STATE_ABBREVS = {
+      'al': 'AL', 'ak': 'AK', 'az': 'AZ', 'ar': 'AR', 'ca': 'CA', 'co': 'CO', 'ct': 'CT', 'de': 'DE',
+      'dc': 'DC', 'fl': 'FL', 'ga': 'GA', 'hi': 'HI', 'id': 'ID', 'il': 'IL', 'in': 'IN', 'ia': 'IA',
+      'ks': 'KS', 'ky': 'KY', 'la': 'LA', 'me': 'ME', 'md': 'MD', 'ma': 'MA', 'mi': 'MI', 'mn': 'MN',
+      'ms': 'MS', 'mo': 'MO', 'mt': 'MT', 'ne': 'NE', 'nv': 'NV', 'nh': 'NH', 'nj': 'NJ', 'nm': 'NM',
+      'ny': 'NY', 'nc': 'NC', 'nd': 'ND', 'oh': 'OH', 'ok': 'OK', 'or': 'OR', 'pa': 'PA', 'ri': 'RI',
+      'sc': 'SC', 'sd': 'SD', 'tn': 'TN', 'tx': 'TX', 'ut': 'UT', 'vt': 'VT', 'va': 'VA', 'wa': 'WA',
+      'wv': 'WV', 'wi': 'WI', 'wy': 'WY'
     };
     
     const FIRST_NAMES = ['Mike', 'Sarah', 'James', 'Tony', 'David', 'Jennifer', 'Robert', 'Maria', 'Carlos', 'Lisa', 'Kevin', 'Amanda', 'Brian', 'Jessica', 'Chris', 'Daniel', 'Stephanie', 'Anthony', 'Nicole', 'Mark'];
@@ -444,11 +490,79 @@
     let currentCityData = { state: 'TX', areaCode: '512', city: 'Austin' };
     
     function getCityData(location) {
-      const loc = location.toLowerCase();
-      for (const [key, data] of Object.entries(CITY_DATA)) {
-        if (loc.includes(key)) return data;
+      if (!location || typeof location !== 'string') {
+        return { state: 'TX', areaCode: '512', city: 'Austin' };
       }
-      return { state: 'TX', areaCode: '512', city: location.split(',')[0].trim() || 'Austin' };
+      
+      const loc = location.trim().toLowerCase();
+      
+      // Parse location: handle both "Austin, TX" and "Austin TX" formats
+      let cityPart, statePart;
+      
+      if (loc.includes(',')) {
+        // Format: "Austin, TX"
+        const parts = loc.split(',');
+        cityPart = parts[0].trim();
+        statePart = parts[1].trim();
+      } else {
+        // Format: "Austin TX" - need to find the state abbreviation (2 letters at end)
+        const match = loc.match(/^(.+?)\s+([a-z]{2})$/);
+        if (match) {
+          cityPart = match[1].trim();
+          statePart = match[2].trim();
+        } else {
+          cityPart = loc;
+          statePart = '';
+        }
+      }
+      
+      // Normalize city key (remove punctuation for matching)
+      const cityKey = cityPart.replace(/[.'"]/g, '').replace(/\s+/g, ' ').trim();
+      
+      // Try to find exact city match first
+      if (CITY_DATA[cityKey]) {
+        const data = { ...CITY_DATA[cityKey] };
+        // If user specified a state, verify it matches
+        if (statePart) {
+          const userState = STATE_ABBREVS[statePart] || statePart.toUpperCase();
+          if (userState === data.state) {
+            return data;
+          }
+          // State mismatch - return default for that city name but with user's state
+          data.state = userState;
+        }
+        return data;
+      }
+      
+      // Try partial match (e.g., "St. Paul" matches "st. paul")
+      for (const [key, data] of Object.entries(CITY_DATA)) {
+        if (cityKey.includes(key) || key.includes(cityKey)) {
+          const result = { ...data };
+          if (statePart) {
+            const userState = STATE_ABBREVS[statePart] || statePart.toUpperCase();
+            result.state = userState;
+          }
+          return result;
+        }
+      }
+      
+      // Default fallback - use provided state if valid
+      let finalState = 'TX';
+      let finalAreaCode = '512';
+      let finalCity = cityPart || 'Austin';
+      
+      if (statePart && STATE_ABBREVS[statePart]) {
+        finalState = STATE_ABBREVS[statePart];
+        // Try to find area code for this state
+        for (const [key, data] of Object.entries(CITY_DATA)) {
+          if (data.state === finalState) {
+            finalAreaCode = data.areaCode;
+            break;
+          }
+        }
+      }
+      
+      return { state: finalState, areaCode: finalAreaCode, city: finalCity };
     }
     
     function generatePhone(areaCode) {
